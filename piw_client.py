@@ -13,13 +13,13 @@ mykeys = pi3d.Keyboard()
 Config = ConfigParser.ConfigParser()
 Config.read("config.ini")
 
-name   = ConfigSectionMap("client")['name']
-server = ConfigSectionMap("client")['server']
-port   = ConfigSectionMap("client")['port']
+name   = Config.get("client",'name')
+server = Config.get("client",'server')
+port   = Config.get("client",'port')
 
 
-xloc = ConfigSectionMap("client")['x_offset']
-yloc = ConfigSectionMap("client")['y_offset']
+xloc = Config.get("client",'x_offset')
+yloc = Config.get("client",'y_offset')
 
 xsize = 1280
 ysize = 800
