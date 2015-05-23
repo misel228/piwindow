@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from __future__ import absolute_import, division, print_function, unicode_literals
 import pi3d
-
+import ConfigParser
 
 DISPLAY = pi3d.Display.create(x=0, y=0)
 shader = pi3d.Shader("uv_flat")
@@ -10,15 +10,22 @@ mykeys = pi3d.Keyboard()
 
 
 #read config
+Config = ConfigParser.ConfigParser()
+Config.read("config.ini")
+
+name   = ConfigSectionMap("client")['name']
+server = ConfigSectionMap("client")['server']
+port   = ConfigSectionMap("client")['port']
 
 
+xloc = ConfigSectionMap("client")['x_offset']
+yloc = ConfigSectionMap("client")['y_offset']
 
-xloc = 100.0
-yloc = 100.0
 xsize = 1280
 ysize = 800
 zindex = 5
 image_file = "images/testbild_opt.png"
+
 sprite = pi3d.ImageSprite(image_file, shader, w=xsize, h=ysize, z=zindex)
 
 
