@@ -3,4 +3,5 @@ name: window1
 x_offset: 0
 y_offset: 0
 server: localhost
-port: 54321
+port: 5321
+default_image: images/testbild_opt.png
