@@ -1,11 +1,14 @@
 #!/usr/bin/python
 from __future__ import absolute_import, division, print_function, unicode_literals
 import pi3d
+import pi3d
 import ConfigParser
 from PIL import Image
 import sys
 import socket
 import time
+
+pi3d.util.Log.set_logs('DEBUG', '/tmp/piwindow.log', "%(asctime)s %(levelname)s: %(name)s: %(message)s")
 
 def coords_str2int(coords):
 	if len(coords) != 22:
@@ -20,6 +23,9 @@ def coords_str2int(coords):
 	y_value = coords[12:22]
 	int_coords = (int(x_value), int(y_value))
 	return int_coords
+
+
+LOGGER = pi3d.util.Log.logger(__name__)
 
 
 #read config
@@ -56,11 +62,11 @@ x_virtual = int(Config.get("client",'x_virtual'))
 y_virtual = int(Config.get("client",'y_virtual'))
 
 ifile = Config.get("client","default_image")
-#try:
-#	im = Image.open(ifile)
-#except:
-#	print("Could not open file "+ifile)
-#	sys.exit()
+try:
+	im = Image.open(ifile)
+except:
+	print("Could not open file "+ifile)
+	sys.exit()
 
 print("set up display")
 xsize,ysize = im.size
@@ -88,8 +94,11 @@ except:
 	print("Error")
 	time.sleep(10)
 
+LOGGER.info("foobar")
 
 print("start loop")
+
+coords = [0,0]
 
 while DISPLAY.loop_running():
 	sprite.position(xloc+coords[0], yloc+coords[1], zindex)
