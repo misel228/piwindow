@@ -26,7 +26,7 @@ DISPLAY = pi3d.Display.create(x=0, y=0)
 DISPLAY.set_background(0,0,0,0) #black
 
 xloc = xloc + (x_virtual - DISPLAY.width) / 2
-yloc = yloc + (y_virtual - DISPLAY.height) / 2
+yloc = yloc - (y_virtual - DISPLAY.height) / 2
 
 
 ##print("foo %d " % DISPLAY.width)
