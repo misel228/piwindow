@@ -71,11 +71,16 @@ DISPLAY.set_background(0,0,0,0) #black
 xloc = xloc + (x_virtual - DISPLAY.width) / 2
 yloc = yloc - (y_virtual - DISPLAY.height) / 2
 
-print("set up openGL")
-
+print("set up shader")
 shader = pi3d.Shader("uv_flat")
+
+print("set up Camera")
 CAMERA = pi3d.Camera(is_3d=False)
+
+print("set up keyboard")
 mykeys = pi3d.Keyboard()
+
+print("set up sprite")
 sprite = pi3d.ImageSprite(ifile, shader, w=xsize, h=ysize, z=zindex)
 
 print("start loop")
