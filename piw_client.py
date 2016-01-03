@@ -61,7 +61,7 @@ except:
 	print("Could not open file "+ifile)
 	sys.exit()
 
-
+print("set up display")
 xsize,ysize = im.size
 zindex = 5
 
@@ -71,14 +71,23 @@ DISPLAY.set_background(0,0,0,0) #black
 xloc = xloc + (x_virtual - DISPLAY.width) / 2
 yloc = yloc - (y_virtual - DISPLAY.height) / 2
 
-
+print("set up openGL")
 
 shader = pi3d.Shader("uv_flat")
 CAMERA = pi3d.Camera(is_3d=False)
 mykeys = pi3d.Keyboard()
 sprite = pi3d.ImageSprite(ifile, shader, w=xsize, h=ysize, z=zindex)
 
+print("start loop")
+
 while DISPLAY.loop_running():
+	sprite.position(xloc+coords[0], yloc+coords[1], zindex)
+	sprite.draw()
+	if mykeys.read() == 27:
+		mykeys.close()
+		DISPLAY.destroy()
+		break
+
 	try:
 		# receive data from client (data, addr)
 		d = s.recvfrom(1024)
@@ -90,11 +99,6 @@ while DISPLAY.loop_running():
 	except:
 		f = 'bar' # NOOP
 
-	sprite.position(xloc+coords[0], yloc+coords[1], zindex)
-	sprite.draw()
-	if mykeys.read() == 27:
-		mykeys.close()
-		DISPLAY.destroy()
-		break
+print("end")
 
 s.close()
