@@ -5,6 +5,7 @@ import ConfigParser
 from PIL import Image
 import sys
 import socket
+import time
 
 def coords_str2int(coords):
 	if len(coords) != 22:
@@ -55,11 +56,11 @@ x_virtual = int(Config.get("client",'x_virtual'))
 y_virtual = int(Config.get("client",'y_virtual'))
 
 ifile = Config.get("client","default_image")
-try:
-	im = Image.open(ifile)
-except:
-	print("Could not open file "+ifile)
-	sys.exit()
+#try:
+#	im = Image.open(ifile)
+#except:
+#	print("Could not open file "+ifile)
+#	sys.exit()
 
 print("set up display")
 xsize,ysize = im.size
@@ -81,7 +82,12 @@ print("set up keyboard")
 mykeys = pi3d.Keyboard()
 
 print("set up sprite")
-sprite = pi3d.ImageSprite(ifile, shader, w=xsize, h=ysize, z=zindex)
+try:
+	sprite = pi3d.ImageSprite(ifile, shader, w=xsize, h=ysize, z=zindex)
+except:
+	print("Error")
+	time.sleep(10)
+
 
 print("start loop")
 
